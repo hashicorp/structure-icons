@@ -25,9 +25,9 @@ let readIcon = async(filePath) => {
 let writeFileToDist = async (filePath, fileData) => {
   let data = fileData || await readIcon(filePath);
 
-  // make the dist folder
+  // make the dist and icons folder
   try {
-    await fs.mkdir('dist');
+    await fs.mkdir('dist/icons/', {recursive: true});
   } catch (err) {
     if (err.code !== 'EEXIST') throw err
   }
@@ -40,7 +40,7 @@ let writeFileToDist = async (filePath, fileData) => {
 let processSVG = async (svgFile) => {
   let inputData = await readIcon(svgFile);
   let output = await svgo.optimize(inputData);
-  await writeFileToDist(svgFile, output.data);
+  await writeFileToDist(path.join('icons', svgFile), output.data);
 }
 
 css.forEach(async (cssFile) => {

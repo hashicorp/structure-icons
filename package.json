@@ -7,8 +7,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "generate-index": "node scripts/generate-index.js",
-    "run-svgo": "node scripts/run-svgo.js",
-    "prepublishOnly": "npm run generate-index && npm run run-svgo"
+    "svgo": "node scripts/run-svgo.js",
+    "prepublishOnly": "npm run generate-index && npm run svgo"
   },
   "author": "",
   "devDependencies": {
