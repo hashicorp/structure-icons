@@ -1,0 +1,38 @@
+.structure-icon-run {
+  animation: structure-icon-run-simple-spin 1s infinite linear;
+}
+
+.structure-icon-run-progress {
+  animation: structure-icon-run-fancy-spin 3s infinite linear;
+  fill: transparent;
+  opacity: 0.66;
+  stroke-dasharray: 16 16;
+  transform-origin: 50% 50%;
+}
+
+@keyframes structure-icon-run-fancy-spin {
+  0% {
+    stroke-dasharray: 4 32;
+  }
+  50% {
+    stroke-dasharray: 24 8;
+  }
+  50% {
+    stroke-dasharray: 4 32;
+  }
+  50% {
+    stroke-dasharray: 24 8;
+  }
+  100% {
+    stroke-dasharray: 4 32;
+  }
+}
+
+@keyframes structure-icon-run-simple-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

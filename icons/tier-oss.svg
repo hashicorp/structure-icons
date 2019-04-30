@@ -1,0 +1,16 @@
+<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <path d="M12 2l9 5v10l-9 5-9-5V7l9-5zm0 2L5 8v8l7 4 7-4V8l-7-4zm.001 1L18 8.5v7L12.001 19 6 15.5v-7L12.001 5z" id="tier-oss-icon"/>
+    <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="tier-oss-shine">
+      <stop stop-color="#FFF" stop-opacity="0.25" offset="0%"/>
+      <stop stop-color="#FFF" stop-opacity="0.5" offset="100%"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <mask id="tier-oss-mask" fill="#fff">
+      <use xlink:href="#tier-oss-icon"/>
+    </mask>
+    <use fill="currentColor" xlink:href="#tier-oss-icon"/>
+    <path fill="url(#tier-oss-shine)" opacity="0.5" mask="url(#tier-oss-mask)" d="M12 2l9 5v10l-9 5z"/>
+  </g>
+</svg>
