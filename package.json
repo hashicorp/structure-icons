@@ -5,7 +5,10 @@
   "main": "dist/index.js",
   "files": ["dist"],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "generate-index": "node scripts/generate-index.js",
+    "run-svgo": "node scripts/run-svgo.js",
+    "prepublishOnly": "npm run generate-index && npm run run-svgo"
   },
   "repository": {
     "type": "git",
