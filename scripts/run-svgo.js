@@ -40,12 +40,16 @@ let processSVG = async svgFile => {
   await writeFileToDist(path.join('icons', svgFile), output.data);
 };
 
+let emojiMeter = (emoji, len) => {
+  return new Array(len).fill(emoji).join('');
+};
+
 async function main() {
   await Promise.all([...css.map(writeFileToDist), ...icons.map(processSVG)]);
-
-  console.log(
-    `🚀 All Finished! copied ${css.length} CSS files and processed ${icons.length} SVG files 💅💅💅.`
-  );
+  console.log(`
+    🚀 All finished! 
+    Copied ${css.length} CSS files: ${emojiMeter('✨', css.length)}
+    Processed ${icons.length} SVG files: ${emojiMeter('💅', icons.length)}`);
 }
 
 main();
