@@ -3,10 +3,11 @@
 const fs = require('fs').promises;
 const path = require('path');
 const SVGO = require('svgo');
+const del = require('del');
 const walkSync = require('walk-sync');
 
-let icons = walkSync('icons', { globs: ['**/*.svg'] });
-let css = walkSync('icons', { globs: ['**/*.css'] });
+let icons = walkSync('src', { globs: ['**/*.svg'] });
+let css = walkSync('src', { globs: ['**/*.css'] });
 let svgo = new SVGO({
   plugins: [
     {
@@ -25,7 +26,7 @@ let readIcon = async filePath => {
 };
 
 let cleanDist = async () => {
-  await fs.rmdir('dist');
+  await del('dist/**');
   await fs.mkdir('dist');
 };
 
@@ -61,17 +62,19 @@ let writeJS = async () => {
 
 let writeHTML = async () => {
   let svgsString = svgs.map(icon => {
-    return `<figure>${icon.svg}<figcaption>${icon.name}</figcaption><figure>`;
+    return `<figure>${icon.svg}<figcaption>${icon.name}</figcaption></figure>`;
   }).join('');
 
   let doc = `
-  <DOCTYPE html>
-  <head>
+  <!DOCTYPE html>
   <style>
+    body { display: flex; flex-direction: row; flex-wrap: wrap; }
+    figure { flex: 1; }
+    figure svg { height: 24px; width: 24px; }
   </style>
-  </head>
-  ${svgString}
+  ${svgsString}
   `;
+  console.log('writing preview HTML to index.html');
   await writeFileToDist('index.html', doc);
   svgs = [];
 };
@@ -85,7 +88,7 @@ async function main() {
     🚀 All finished! 
     Copied ${css.length} CSS files: ${emojiMeter('✨', css.length)}
     Processed ${icons.length} SVG files: ${emojiMeter('💅', icons.length)}
-    Preview them by openting the dist/index.html file.
+    Preview them by opening the dist/index.html file.
     `);
 }
 
