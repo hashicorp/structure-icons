@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
-const fs = require('fs').promises;
+const FS = require('fs');
+const fs = FS.promises;
 const path = require('path');
 const SVGO = require('svgo');
 const walkSync = require('walk-sync');
@@ -25,26 +26,26 @@ let readIcon = async filePath => {
 
 let writeFileToDist = async (filePath, fileData) => {
   let data = fileData || (await readIcon(filePath));
-
-  // make the dist and icons folder
-  try {
-    await fs.mkdir('dist/icons/', { recursive: true });
-  } catch (err) {
-    if (err.code !== 'EEXIST') throw err;
+  if (!FS.existsSync('dist/icons')) {
+    await fs.mkdir('dist/icons', { recursive: true });
   }
   await fs.writeFile(path.join(process.cwd(), 'dist', filePath), data);
 };
 
 let processSVG = async svgFile => {
   let inputData = await readIcon(svgFile);
+  console.log(`optimizing SVG file: ${svgFile}`);
   let output = await svgo.optimize(inputData);
+  console.log(`writing optimized SVG to dist: ${svgFile}`);
   await writeFileToDist(path.join('icons', svgFile), output.data);
 };
 
-css.forEach(async cssFile => {
-  await writeFileToDist(cssFile);
-});
+async function main() {
+  await Promise.all([...css.map(writeFileToDist), ...icons.map(processSVG)]);
 
-icons.forEach(async (iconFile, i) => {
-  await processSVG(iconFile);
-});
+  console.log(
+    `🚀 All Finished! copied ${css.length} CSS files and processed ${icons.length} SVG files 💅💅💅.`
+  );
+}
+
+main();
