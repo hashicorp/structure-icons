@@ -37,11 +37,10 @@ let writeFileToDist = async (filePath, fileData) => {
 
 let processSVG = async svgFile => {
   let inputData = await readIcon(svgFile);
-  console.log(`${svgFile}: optimizing SVG file`);
   let output = await svgo.optimize(inputData);
   console.log(`${svgFile}: writing optimized SVG to dist`);
   // keep the string to write an HTML file with embbeded SVGs
-  svgs.push({name: svgFile, svg: output.data});
+  svgs.push({ name: svgFile, svg: output.data });
   await writeFileToDist(svgFile, output.data);
 };
 
@@ -49,9 +48,8 @@ let emojiMeter = (emoji, len) => {
   return new Array(len).fill(emoji).join('');
 };
 
-
 let writeJS = async () => {
-  let list= icons.map(path => {
+  let list = icons.map(path => {
     // we want the filename w/o the extension
     return path.replace(/\.svg$/, '');
   });
@@ -61,9 +59,11 @@ let writeJS = async () => {
 };
 
 let writeHTML = async () => {
-  let svgsString = svgs.map(icon => {
-    return `<figure>${icon.svg}<figcaption>${icon.name}</figcaption></figure>`;
-  }).join('');
+  let svgsString = svgs
+    .map(icon => {
+      return `<figure>${icon.svg}<figcaption>${icon.name}</figcaption></figure>`;
+    })
+    .join('');
 
   let doc = `
   <!DOCTYPE html>
