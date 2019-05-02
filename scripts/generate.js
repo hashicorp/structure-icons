@@ -20,35 +20,35 @@ let svgo = new SVGO({
 });
 let svgs = [];
 
-let readIcon = async filePath => {
+async function readIcon(filePath) {
   let icon = await fs.readFile(path.join(process.cwd(), 'src', filePath));
   return icon;
-};
+}
 
-let cleanDist = async () => {
+async function cleanDist() {
   await del('dist/**');
   await fs.mkdir('dist');
-};
+}
 
-let writeFileToDist = async (filePath, fileData) => {
+async function writeFileToDist(filePath, fileData) {
   let data = fileData || (await readIcon(filePath));
   await fs.writeFile(path.join(process.cwd(), 'dist', filePath), data);
-};
+}
 
-let processSVG = async svgFile => {
+async function processSVG(svgFile) {
   let inputData = await readIcon(svgFile);
   let output = await svgo.optimize(inputData);
   console.log(`${svgFile}: writing optimized SVG to dist`);
   // keep the string to write an HTML file with embbeded SVGs
   svgs.push({ name: svgFile, svg: output.data });
   await writeFileToDist(svgFile, output.data);
-};
+}
 
-let emojiMeter = (emoji, len) => {
+function emojiMeter(emoji, len) {
   return new Array(len).fill(emoji).join('');
-};
+}
 
-let writeJS = async () => {
+async function writeJS() {
   let list = icons.map(path => {
     // we want the filename w/o the extension
     return path.replace(/\.svg$/, '');
@@ -56,9 +56,9 @@ let writeJS = async () => {
 
   console.log(`writing index.js with ${icons.length} SVG filenames`);
   await writeFileToDist('index.js', `export default ${JSON.stringify(list, null, 2)};`);
-};
+}
 
-let writeHTML = async () => {
+async function writeHTML() {
   let svgsString = svgs
     .map(icon => {
       return `<figure>${icon.svg}<figcaption>${icon.name}</figcaption></figure>`;
@@ -77,7 +77,7 @@ let writeHTML = async () => {
   console.log('writing preview HTML to index.html');
   await writeFileToDist('index.html', doc);
   svgs = [];
-};
+}
 
 async function main() {
   await cleanDist();
@@ -89,7 +89,7 @@ async function main() {
     Copied ${css.length} CSS files: ${emojiMeter('✨', css.length)}
     Processed ${icons.length} SVG files: ${emojiMeter('💅', icons.length)}
     Preview them by opening the dist/index.html file.
-    `);
+  `);
 }
 
 main();
