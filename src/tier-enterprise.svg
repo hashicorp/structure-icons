@@ -1,0 +1,16 @@
+<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <path d="M19 11.75V8l-7-4-7 4v8l7 4 7-4v-4.25zm-1 .571l-2 1.143V9.5L12 7 8 9.5v3.964l-2-1.143V8.5l6-3.25 6 3.25v3.821zM12 2l9 5v10l-9 5-9-5V7l9-5zm0 6.25L15 10v4l-3 1.75L9 14v-4l3-1.75zM12 17l6-3.75v2.25l-6 3.25-6-3.25v-2.25L12 17z" id="tier-enterprise-icon"/>
+    <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="tier-enterprise-shine">
+      <stop stop-color="#FFF" stop-opacity="0.25" offset="0%"/>
+      <stop stop-color="#FFF" stop-opacity="0.5" offset="100%"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <mask id="tier-enterprise-mask" fill="#fff">
+      <use xlink:href="#tier-enterprise-icon"/>
+    </mask>
+    <use fill="currentColor" xlink:href="#tier-enterprise-icon"/>
+    <path fill="url(#tier-enterprise-shine)" opacity="0.5" mask="url(#tier-enterprise-mask)" d="M12 2l9 5v10l-9 5z"/>
+  </g>
+</svg>
