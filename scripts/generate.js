@@ -31,8 +31,13 @@ async function cleanDist() {
 }
 
 async function writeFileToDist(filePath, fileData) {
-  let data = fileData || (await readIcon(filePath));
-  await fs.writeFile(path.join(process.cwd(), 'dist', filePath), data);
+  let dest = path.join(process.cwd(), 'dist', filePath);
+  if (fileData) {
+    await fs.writeFile(dest, fileData);
+  } else {
+    // we want to copy
+    await fs.copyFile(path.join(process.cwd(), 'src', filePath), dest);
+  }
 }
 
 async function processSVG(svgFile) {
@@ -59,6 +64,11 @@ async function writeJS() {
 }
 
 async function writeHTML() {
+  let styleString = css
+    .map(sheet => {
+      return `<link href="./${sheet}" rel="stylesheet" />`;
+    })
+    .join('');
   let svgsString = svgs
     .map(icon => {
       return `<figure>${icon.svg}<figcaption>${icon.name}</figcaption></figure>`;
@@ -67,6 +77,7 @@ async function writeHTML() {
 
   let doc = `
   <!DOCTYPE html>
+  ${styleString}
   <style>
     body { display: flex; flex-direction: row; flex-wrap: wrap; }
     figure { flex: 1; }
@@ -81,7 +92,7 @@ async function writeHTML() {
 
 async function main() {
   await cleanDist();
-  await Promise.all([...css.map(writeFileToDist), ...icons.map(processSVG)]);
+  await Promise.all([...css.map(f => writeFileToDist(f)), ...icons.map(processSVG)]);
   await writeHTML();
   await writeJS();
   console.log(`
