@@ -79,8 +79,7 @@ async function writeHTML() {
   <!DOCTYPE html>
   ${styleString}
   <style>
-    body { display: flex; flex-direction: row; flex-wrap: wrap; }
-    figure { flex: 1; }
+    body { display: grid; grid-template-columns: repeat(auto-fill, minmax(16em, 1fr)); grid-gap: 1em; }
     figure svg { height: 24px; width: 24px; }
   </style>
   ${svgsString}
