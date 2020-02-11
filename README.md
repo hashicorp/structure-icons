@@ -30,6 +30,16 @@ var app = new EmberApp({
 });
 ```
 
+## Updating icons
+For each release of Structure, we should update the icons in this library:
+
+1. Go to the [Icon System page in Figma](https://www.figma.com/file/jCdDbni26PXXf4lJtTvh6G/Structure-1.x?node-id=0%3A64)
+1. Highlight all of the icons under the "Icons" and "Logos" headers to the right of the sticker sheet
+1. Use the right panel to export the icons in SVG format to the `/src` folder in this repo (if you delete any files from `/src`, be careful not to delete the "run" or "loading" SVG files or their CSS).
+1. Run `npm run generate`
+1. Review `/dist/index.html` to make sure your updates were added correctly
+1. Commit your changes and follow the "New releases" instructions below
+
 ## New releases
 To release a new version of `@hashicorp/structure-icons` you should:
 

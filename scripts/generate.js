@@ -16,6 +16,11 @@ let svgo = new SVGO({
     {
       removeDimensions: true,
     },
+    {
+      convertColors: {
+        currentColor: 'black',
+      },
+    },
   ],
 });
 let svgs = [];
@@ -30,8 +35,15 @@ async function cleanDist() {
   await fs.mkdir('dist');
 }
 
+function dasherize(string) {
+  return string
+    .replace(/\s-\s/g, '-')
+    .replace(/\s+/g, '-')
+    .toLowerCase();
+}
+
 async function writeFileToDist(filePath, fileData) {
-  let dest = path.join(process.cwd(), 'dist', filePath);
+  let dest = path.join(process.cwd(), 'dist', dasherize(filePath));
   if (fileData) {
     await fs.writeFile(dest, fileData);
   } else {
