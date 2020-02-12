@@ -57,7 +57,7 @@ async function processSVG(svgFile) {
   let output = await svgo.optimize(inputData);
   console.log(`${svgFile}: writing optimized SVG to dist`);
   // keep the string to write an HTML file with embbeded SVGs
-  svgs.push({ name: svgFile, svg: output.data });
+  svgs.push({ name: dasherize(svgFile), svg: output.data });
   await writeFileToDist(svgFile, output.data);
 }
 
