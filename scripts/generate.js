@@ -55,7 +55,7 @@ async function writeFileToDist(filePath, fileData) {
 async function processSVG(svgFile) {
   let inputData = await readIcon(svgFile);
   let output = await svgo.optimize(inputData);
-  console.log(`${svgFile}: writing optimized SVG to dist`);
+  console.log(`${svgFile}: writing optimized SVG to dist as ${dasherize(svgFile)}`);
   // keep the string to write an HTML file with embbeded SVGs
   svgs.push({ name: dasherize(svgFile), svg: output.data });
   await writeFileToDist(svgFile, output.data);
