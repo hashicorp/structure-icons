@@ -1,6 +1,6 @@
 {
   "name": "@hashicorp/structure-icons",
-  "version": "1.3.0",
+  "version": "1.8.0",
   "description": "Icons for HashiCorp Structure design system",
   "main": "dist/index.js",
   "files": [
