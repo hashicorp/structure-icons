@@ -3,6 +3,8 @@
   "version": "1.8.0",
   "description": "Icons for HashiCorp Structure design system",
   "main": "dist/index.js",
+  "repository": "hashicorp/structure-icons",
+  "license": "MPL-2.0",
   "files": [
     "dist"
   ],
