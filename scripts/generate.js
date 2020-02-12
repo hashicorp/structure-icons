@@ -68,7 +68,7 @@ function emojiMeter(emoji, len) {
 async function writeJS() {
   let list = icons.map(path => {
     // we want the filename w/o the extension
-    return path.replace(/\.svg$/, '');
+    return dasherize(path).replace(/\.svg$/, '');
   });
 
   console.log(`writing index.js with ${icons.length} SVG filenames`);
