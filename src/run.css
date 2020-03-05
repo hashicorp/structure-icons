@@ -1,11 +1,10 @@
-.structure-icon-run {
+#structure-icon-run {
   animation: structure-icon-run-simple-spin 1s infinite linear;
+  transform-origin: 50% 50%;
 }
 
-.structure-icon-run-progress {
+#structure-icon-run-progress {
   animation: structure-icon-run-fancy-spin 3s infinite linear;
-  fill: transparent;
-  opacity: 0.66;
   stroke-dasharray: 16 16;
   transform-origin: 50% 50%;
 }

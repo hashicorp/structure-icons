@@ -21,6 +21,9 @@ let svgo = new SVGO({
         currentColor: 'black',
       },
     },
+    {
+      cleanupIDs: false,
+    },
   ],
 });
 let svgs = [];

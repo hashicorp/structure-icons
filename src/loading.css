@@ -1,8 +1,8 @@
-.structure-icon-loading-base {
+#structure-icon-loading-base {
   opacity: 0.1;
 }
 
-.structure-icon-loading-progress {
+#structure-icon-loading-progress {
   animation: structure-icon-loading-fancy-spin 3s infinite linear;
   opacity: 0.25;
   stroke-dasharray: 0 44;
