@@ -14,17 +14,19 @@ Generally speaking, you install the package and then SVG files will be located
 at `@hashicorp/structure-icons/dist/name-of-icon.svg`. If you need a list of
 icons, one is available for import at `@hashicorp/structure-icons/dist/index.js`.
 
-### ember-inline-svg
+### ember-svg-jar
 After installation, add the following to your `ember-cli-build.js`: 
 
 ```
 var app = new EmberApp({
-  svg: {
-    // structure icons have already been through svgo so no reason to run again
+  svgJar: {
+    // Icons have already been optimized via SVGO, 
+    // so we don't need to optimize them again.
     optimize: false,
+    
     paths: [
-      ... other paths here...,
-      'node_modules/@hashicorp/structure-icons/dist'
+      'path/to/node_modules/@hashicorp/structure-icons/dist',
+      // ... additional paths
     ]
   }
 });
