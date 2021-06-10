@@ -43,11 +43,22 @@ For each release of Structure, we should update the icons in this library:
 1. Commit your changes and follow the "New releases" instructions below
 
 ## New releases
+
+### Prerequisites
+
+In order to publish packages, you must:
+
+1. Be added to the HashiCorp organization on `npm`
+2. [Enable 2-factor authentication](https://docs.npmjs.com/configuring-two-factor-authentication) on your npm account
+3. Log into to `npm` in your CLI with [`npm login`](https://docs.npmjs.com/cli/adduser)
+
+### Publishing
+
 To release a new version of `@hashicorp/structure-icons` you should:
 
 1. ensure the `src` folder contains all of the CSS and SVG files you want to publish
 1. bump version number in the package.json
+1. commit & merge changes after review
 1. run `npm publish` - this will run the `prepublishOnly` hook which will
    re-generate all of the optimized SVGs from the src folder and copy them to a
    `dist` folder.
-1. commit & push changes
