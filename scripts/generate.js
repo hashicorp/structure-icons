@@ -75,6 +75,18 @@ async function writeJS() {
   await writeFileToDist('index.js', `export default ${JSON.stringify(list, null, 2)};`);
 }
 
+async function writeJStoObject() {
+  let list = {};
+  icons.map(path => {
+    // we want the filename w/o the extension
+    list[dasherize(path).replace(/\.svg$/, '')] = '';
+  });
+
+  console.log(`writing icon-object.js with ${icons.length} SVG filenames`);
+
+  await writeFileToDist('icon-object.js', `export default ${JSON.stringify(list, null, 2)};`);
+}
+
 async function writeHTML() {
   let styleString = css
     .map(sheet => {
@@ -106,6 +118,7 @@ async function main() {
   await Promise.all([...css.map(f => writeFileToDist(f)), ...icons.map(processSVG)]);
   await writeHTML();
   await writeJS();
+  await writeJStoObject();
   console.log(`
     🚀 All finished! 
     Copied ${css.length} CSS files: ${emojiMeter('✨', css.length)}
