@@ -1,3 +1,5 @@
+**Structure Icons are deprecated. Please use icons provided by https://github.com/hashicorp/design-system.**
+
 # structure-icons
 Icons for the HashiCorp Structure design system.
 
